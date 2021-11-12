@@ -1,6 +1,6 @@
 # SouthernDigestion
 
-##What to use for?
+## What to use for?
 The program searches for one/two enzyme(s) used
 in Southern Blot to verify the transformation of
 an organism.
@@ -9,7 +9,7 @@ transformation and an _in cbx_ (_Ustilago maydis_
 specific locus) transformation.
 
 
-##How to use?
+## How to use?
 You need the .ape-files in which the features where the
 probe used in Southern Blot.
 The program is started by "python Southern.py".
@@ -48,12 +48,12 @@ couldn't find a enzyme for single use for digestion,
 it moves on giving enyzme combinations suitable for
 digesting the DNA prior to Southern Blot.
 
-##Which enzymes is the program checking for?
+## Which enzymes is the program checking for?
 You can find the list of enzymes and their features 
 in the file "Enyzmedatabase.py". The list can also be
 adapted to your needs.
 
-##What are the criteria for suitable enzymes?
+## What are the criteria for suitable enzymes?
 All bands have to be between 8000 bp and 1000 bp.
 The difference between two bands has to be at least 
 500 bp. If one of the compared bands is over the 
@@ -64,7 +64,7 @@ to be at least 2000 bp. In case of _in locus_ integration
 at least one of the sequences digestions (wildtype or
 mutation) should result in more than one band.
 
-##How do the single files of the program work together?
+## How do the single files of the program work together?
 The file "OpenApe.py" takes the location of the 
 .ape-files, opens them and saves the features, their
 locations and the sequence.
