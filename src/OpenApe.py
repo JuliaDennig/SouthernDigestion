@@ -9,8 +9,7 @@ def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
             break
 
 def get_location_of_ape_file():
-    apelines, features, keyfeatures = [], [], []
-    yes = ["yes", "y", "Y", "Yes"]; no = ["no", "n", "No", "N"]
+    apelines = []
     location_apefile = input("Where is the location_apefile saved? ")
     with open(location_apefile, "r") as location_apefile:
         apelines.append(location_apefile.readlines())
@@ -22,6 +21,9 @@ def get_location_of_ape_file():
     return apelines
 
 def get_information_from_ape_file(apelines):
+    features, keyfeatures = [], []
+    yes = ["yes", "y", "Y", "Yes"]
+    no = ["no", "n", "No", "N"]
     sequence_start = apelines[0].index("ORIGIN\n") + 1
     sequence = ''.join(apelines[0][sequence_start:])
     sequence = sequence.replace("\n", "").replace(" ", "").replace("\t", "").replace("/", "").upper()
