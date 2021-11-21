@@ -8,18 +8,20 @@ def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
             keyfeatures.append(probe_bindingsite)
             break
 
-def get_information_from_ape_file():
+def get_location_of_ape_file():
     apelines, features, keyfeatures = [], [], []
     yes = ["yes", "y", "Y", "Yes"]; no = ["no", "n", "No", "N"]
-    apefile = input("Where is the apefile saved? ")
-    with open(apefile, "r") as apefile:
-        apelines.append(apefile.readlines())
+    location_apefile = input("Where is the location_apefile saved? ")
+    with open(location_apefile, "r") as location_apefile:
+        apelines.append(location_apefile.readlines())
     for i, elem in enumerate(apelines[0]):
         if 'linear' in elem:
             print("\nThe sequence is linear.\n")
         elif 'circular' in elem:
             print("The sequence is circular.\n")
+    return apelines
 
+def get_information_from_ape_file(apelines):
     sequence_start = apelines[0].index("ORIGIN\n") + 1
     sequence = ''.join(apelines[0][sequence_start:])
     sequence = sequence.replace("\n", "").replace(" ", "").replace("\t", "").replace("/", "").upper()
