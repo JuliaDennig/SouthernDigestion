@@ -1,3 +1,11 @@
+def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
+    while True:
+        probe_bindingsite = input("Please choose the features where the probe is binding.\n")
+        if probe_bindingsite in probesdic and probe_bindingsite not in probe_bindingsites:
+            probe_bindingsites.update({probe_bindingsite: probesdic[probe_bindingsite]})
+            keyfeatures.append(probe_bindingsite)
+            break
+
 def get_information_from_ape_file():
     apelines = []; features = []; keyfeatures = []; yes = ["yes", "y", "Y", "Yes"]; no = ["no", "n", "No", "N"]
     apefile = input("Where is the apefile saved? ")
@@ -49,11 +57,3 @@ def get_information_from_ape_file():
             break
     return sequence, probe_bindingsites, keyfeatures
 
-
-def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
-    while True:
-        probe_bindingsite = input("Please choose the features where the probe is binding.\n")
-        if probe_bindingsite in probesdic and probe_bindingsite not in probe_bindingsites:
-            probe_bindingsites.update({probe_bindingsite: probesdic[probe_bindingsite]})
-            keyfeatures.append(probe_bindingsite)
-            break

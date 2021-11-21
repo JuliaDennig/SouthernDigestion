@@ -3,6 +3,54 @@ from Southern_current import southern_one_enzyme
 from Southern_current import southern_two_enzymes
 from BiologicalCheck import is_size_difference_valid
 
+def print_results(index, mut_keydict, wt_keydict, keyList, enzymes, only_one_enzyme, p):
+    MYENZYMES, TOPENZYMES = get_enzymes_dicts()
+    if not enzymes:
+        print(keyList[index])
+    else:
+        print(enzymes[0], "+", enzymes[1])
+
+    if not only_one_enzyme:
+        print("resulting bands for wildtype", wt_keydict[keyList[index]])
+        print("resulting bands for mutation", mut_keydict[keyList[index]])
+    elif p == "wt":
+        print("resulting bands for wildtype", wt_keydict[keyList[index]])
+        print("resulting bands for mutation", only_one_enzyme)
+    elif p == "mut":
+        print("resulting bands for wildtype", only_one_enzyme)
+        print("resulting bands for mutation", mut_keydict[keyList[index]])
+
+    if not enzymes:
+        print("binding site:", MYENZYMES[keyList[index]][0])
+        print(MYENZYMES[keyList[index]][1], "ends")
+        print("buffer:", MYENZYMES[keyList[index]][2])
+        print("temperature:", MYENZYMES[keyList[index]][3])
+        print("\n")
+    else:
+        print("binding site of", enzymes[0], ":", MYENZYMES[enzymes[0]][0])
+        print("binding site of", enzymes[1], ":", MYENZYMES[enzymes[1]][0])
+        print(enzymes[0], "has", MYENZYMES[enzymes[0]][1], "ends")
+        print(enzymes[1], "has", MYENZYMES[enzymes[1]][1], "ends")
+        buffers1 = MYENZYMES[enzymes[0]][2].split("/")
+        buffers2 = MYENZYMES[enzymes[1]][2].split("/")
+        if "CS" in buffers1 and "CS" in buffers2:
+            print("buffer: CS")
+        elif "3.1" in buffers1 and "3.1" in buffers2:
+            print("buffer: 3.1")
+        elif "2.1" in buffers1 and "2.1" in buffers2:
+            print("buffer: 2.1")
+        else:
+            print("Please select the suitable buffer manually")
+            print("buffers of", enzymes[0], ":", MYENZYMES[enzymes[0]][2])
+            print("buffers of", enzymes[1], ":", MYENZYMES[enzymes[1]][2])
+        if MYENZYMES[enzymes[0]][3] == "37 °C" and MYENZYMES[enzymes[1]][3] == "37 °C":
+            print("temperature: 37 °C")
+        elif MYENZYMES[enzymes[0]][3] == "50 °C" and MYENZYMES[enzymes[1]][3] == "50 °C":
+            print("temperature: 50 °C")
+        else:
+            print("Digestion has to be done in two steps with following temperatures:",
+                  MYENZYMES[enzymes[0]][3], ",", MYENZYMES[enzymes[1]][3])
+        print("\n")
 
 def southern_in_locus():
     print("WILDTYPE")
@@ -62,51 +110,3 @@ def southern_in_locus():
                             p = "mut"
                             print_results(j, mut_keydict2, wt_keydict2, final_keylist, enzymes, only_one_enzyme, p)
 
-def print_results(index, mut_keydict, wt_keydict, keyList, enzymes, only_one_enzyme, p):
-    MYENZYMES, TOPENZYMES = get_enzymes_dicts()
-    if not enzymes:
-        print(keyList[index])
-    else:
-        print(enzymes[0], "+", enzymes[1])
-
-    if not only_one_enzyme:
-        print("resulting bands for wildtype", wt_keydict[keyList[index]])
-        print("resulting bands for mutation", mut_keydict[keyList[index]])
-    elif p == "wt":
-        print("resulting bands for wildtype", wt_keydict[keyList[index]])
-        print("resulting bands for mutation", only_one_enzyme)
-    elif p == "mut":
-        print("resulting bands for wildtype", only_one_enzyme)
-        print("resulting bands for mutation", mut_keydict[keyList[index]])
-
-    if not enzymes:
-        print("binding site:", MYENZYMES[keyList[index]][0])
-        print(MYENZYMES[keyList[index]][1], "ends")
-        print("buffer:", MYENZYMES[keyList[index]][2])
-        print("temperature:", MYENZYMES[keyList[index]][3])
-        print("\n")
-    else:
-        print("binding site of", enzymes[0], ":", MYENZYMES[enzymes[0]][0])
-        print("binding site of", enzymes[1], ":", MYENZYMES[enzymes[1]][0])
-        print(enzymes[0], "has", MYENZYMES[enzymes[0]][1], "ends")
-        print(enzymes[1], "has", MYENZYMES[enzymes[1]][1], "ends")
-        buffers1 = MYENZYMES[enzymes[0]][2].split("/")
-        buffers2 = MYENZYMES[enzymes[1]][2].split("/")
-        if "CS" in buffers1 and "CS" in buffers2:
-            print("buffer: CS")
-        elif "3.1" in buffers1 and "3.1" in buffers2:
-            print("buffer: 3.1")
-        elif "2.1" in buffers1 and "2.1" in buffers2:
-            print("buffer: 2.1")
-        else:
-            print("Please select the suitable buffer manually")
-            print("buffers of", enzymes[0], ":", MYENZYMES[enzymes[0]][2])
-            print("buffers of", enzymes[1], ":", MYENZYMES[enzymes[1]][2])
-        if MYENZYMES[enzymes[0]][3] == "37 °C" and MYENZYMES[enzymes[1]][3] == "37 °C":
-            print("temperature: 37 °C")
-        elif MYENZYMES[enzymes[0]][3] == "50 °C" and MYENZYMES[enzymes[1]][3] == "50 °C":
-            print("temperature: 50 °C")
-        else:
-            print("Digestion has to be done in two steps with following temperatures:",
-                  MYENZYMES[enzymes[0]][3], ",", MYENZYMES[enzymes[1]][3])
-        print("\n")

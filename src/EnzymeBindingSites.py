@@ -1,3 +1,12 @@
+def append_enzyme_binding_sites(TopEnzymes, i, keyfeatures, keylist, probe_bindingsites, split, splitdic, splitlist):
+    splitlist.append(split)
+    splitdic.update({TopEnzymes[i]: splitlist})
+    for k in range(len(probe_bindingsites)):
+        keyfeature = probe_bindingsites[keyfeatures[k]]
+        if (int(keyfeature[0]) <= split <= int(keyfeature[1])) and TopEnzymes[i] not in keylist:
+            keylist.append(TopEnzymes[i])
+            break
+
 def get_enzyme_binding_sites_dict(sequence, probe_bindingsites, keyfeatures):
     from Enzymdatabase import get_enzymes_dicts
     import re
@@ -32,12 +41,3 @@ def get_enzyme_binding_sites_dict(sequence, probe_bindingsites, keyfeatures):
             splitdic_multiple.pop(key2)
     return splitdic, splitdic_multiple
 
-
-def append_enzyme_binding_sites(TopEnzymes, i, keyfeatures, keylist, probe_bindingsites, split, splitdic, splitlist):
-    splitlist.append(split)
-    splitdic.update({TopEnzymes[i]: splitlist})
-    for k in range(len(probe_bindingsites)):
-        keyfeature = probe_bindingsites[keyfeatures[k]]
-        if (int(keyfeature[0]) <= split <= int(keyfeature[1])) and TopEnzymes[i] not in keylist:
-            keylist.append(TopEnzymes[i])
-            break
