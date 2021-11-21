@@ -1,10 +1,10 @@
-from Enzymdatabase import get_enzymes_dicts
+import Enzymdatabase
 from Southern_current import southern_one_enzyme
 from Southern_current import southern_two_enzymes
 from BiologicalCheck import is_size_difference_valid
 
 def print_results(index, mi_keydict, si_keydict, wt_keydict, keyList, enzymes, only_one_enzyme, p):
-    MYENZYMES, TOPENZYMES = get_enzymes_dicts()
+    MYENZYMES = Enzymdatabase.MYENZYMES
     if not enzymes:
         print(keyList[index])
     else:

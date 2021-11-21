@@ -1,4 +1,4 @@
-from Enzymdatabase import get_enzymes_dicts
+import Enzymdatabase
 import re
 
 def append_enzyme_binding_sites(TopEnzymes, i, keyfeatures, keylist, probe_bindingsites, split, splitdic, splitlist):
@@ -11,7 +11,8 @@ def append_enzyme_binding_sites(TopEnzymes, i, keyfeatures, keylist, probe_bindi
             break
 
 def get_enzyme_binding_sites_dict(sequence, probe_bindingsites, keyfeatures):
-    MYENZYMES, TOPENZYMES = get_enzymes_dicts()
+    MYENZYMES = Enzymdatabase.MYENZYMES
+    TOPENZYMES = Enzymdatabase.TOPENZYMES
 
     splitdic = {}
     keylist = []

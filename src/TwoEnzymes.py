@@ -1,5 +1,5 @@
 def check_digestion_with_two_enzymes(splitdic, probe_bindingsites, keyfeatures):
-    keylist2, keylist_two_enzymes = [], []\
+    keylist2, keylist_two_enzymes = [], []
     new_splitdict, keydict, banddict = {}, {}, {}
 
     for key in splitdic:
