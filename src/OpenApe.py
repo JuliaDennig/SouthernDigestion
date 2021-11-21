@@ -1,5 +1,6 @@
 import re
 
+
 def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
     # takes the feature(s) where the probe is binding as input
 
@@ -9,6 +10,7 @@ def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
             probe_bindingsites.update({probe_bindingsite: probesdic[probe_bindingsite]})
             keyfeatures.append(probe_bindingsite)
             break
+
 
 def get_location_of_ape_file():
     # takes location of the ape file as input, reads the ape file one line at a time
@@ -25,6 +27,7 @@ def get_location_of_ape_file():
         elif 'circular' in elem:
             print("The sequence is circular.\n")
     return apelines
+
 
 def get_information_from_ape_file(apelines):
     # takes the list with the lines from the ape files, saves the sequence in a string (sequence)
@@ -46,11 +49,11 @@ def get_information_from_ape_file(apelines):
         features.append(apelines[0][k])
 
     probes, labels = [], []
-    for l, elem in enumerate(features):
+    for o, elem in enumerate(features):
         if '..' in elem:
-            probes.append(l)
+            probes.append(o)
         if '/label=' in elem:
-            labels.append(l)
+            labels.append(o)
 
     probesdict = {}
     labellist = []
@@ -75,4 +78,3 @@ def get_information_from_ape_file(apelines):
             break
 
     return sequence, probe_bindingsites, keyfeatures
-

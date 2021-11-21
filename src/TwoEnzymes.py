@@ -39,7 +39,8 @@ def check_digestion_with_two_enzymes(splitdic, probe_bindingsites, keyfeatures):
         keylist3 = []
         for q in range(len(keyfeatures)):
             bands_two_enzymes = banddict[keylist_two_enzymes[n]]
-            if bands_two_enzymes and bands_two_enzymes[q] and bands_two_enzymes[q][1] - bands_two_enzymes[q][0] not in keylist3:
+            if bands_two_enzymes and bands_two_enzymes[q] \
+                    and bands_two_enzymes[q][1] - bands_two_enzymes[q][0] not in keylist3:
                 keylist3.append(bands_two_enzymes[q][1] - bands_two_enzymes[q][0])
                 keylist3.sort(reverse=True)
         keydict.update({keylist_two_enzymes[n]: keylist3})

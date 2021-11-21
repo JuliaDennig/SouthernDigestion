@@ -29,8 +29,8 @@ def check_digestion_with_one_enzyme(splitdic_multiple, probe_bindingsites, keyfe
                 surrounding_bands.append(bigger_bands[0])
             banddict.update({keyfeatures[k]: surrounding_bands})
 
-        for l in range(len(keyfeatures)):
-            current_bands = banddict[keyfeatures[l]]
+        for o in range(len(keyfeatures)):
+            current_bands = banddict[keyfeatures[o]]
             if current_bands and current_bands[1] - current_bands[0] not in keylist3:
                 keylist3.append(current_bands[1] - current_bands[0])
                 keylist3.sort(reverse=True)

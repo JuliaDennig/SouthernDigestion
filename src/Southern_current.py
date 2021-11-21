@@ -4,6 +4,7 @@ from EnzymeBindingSites import get_enzyme_binding_sites_dict
 from OneEnzyme import check_digestion_with_one_enzyme
 from TwoEnzymes import check_digestion_with_two_enzymes
 
+
 def southern_one_enzyme():
     # runs OpenApe.py, EnzymeBindingSites.py and OneEnzyme.py
 

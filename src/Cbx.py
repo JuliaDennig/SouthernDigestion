@@ -3,43 +3,44 @@ from Southern_current import southern_one_enzyme
 from Southern_current import southern_two_enzymes
 from BiologicalCheck import is_size_difference_valid
 
-def print_results(index, mi_keydict, si_keydict, wt_keydict, keyList, enzymes, only_one_enzyme, p):
+
+def print_results(index, mi_keydict, si_keydict, wt_keydict, keylist, enzymes, only_one_enzyme, p):
     # prints the results of the in silico Southern digestion:
     # enzyme(s) to use, resulting band(s) for wildtype/single integration/multiple integration, binding site(s),
     # cutting type(s), buffer, and  temperature
 
-    MYENZYMES = Enzymdatabase.MYENZYMES
+    myenzymes = Enzymdatabase.MYENZYMES
     if not enzymes:
-        print(keyList[index])
+        print(keylist[index])
     else:
         print(enzymes[0], "+", enzymes[1])
 
     if not only_one_enzyme:
-        print("resulting bands for wildtype:", wt_keydict[keyList[index]])
-        print("resulting bands for single integration:", si_keydict[keyList[index]])
-        print("resulting bands for multiple integration:", mi_keydict[keyList[index]])
+        print("resulting bands for wildtype:", wt_keydict[keylist[index]])
+        print("resulting bands for single integration:", si_keydict[keylist[index]])
+        print("resulting bands for multiple integration:", mi_keydict[keylist[index]])
     elif p == "wt":
-        print("resulting bands for wildtype:", wt_keydict[keyList[index]])
+        print("resulting bands for wildtype:", wt_keydict[keylist[index]])
         print("resulting bands for single integration:", only_one_enzyme[0])
         print("resulting bands for multiple integration:", only_one_enzyme[1])
     elif p == "si+mi":
         print("resulting bands for wildtype:", only_one_enzyme)
-        print("resulting bands for single integration:", si_keydict[keyList[index]])
-        print("resulting bands for multiple integration:", mi_keydict[keyList[index]])
+        print("resulting bands for single integration:", si_keydict[keylist[index]])
+        print("resulting bands for multiple integration:", mi_keydict[keylist[index]])
 
     if not enzymes:
-        print("binding site:", MYENZYMES[keyList[index]][0])
-        print(MYENZYMES[keyList[index]][1], "ends")
-        print("buffer:", MYENZYMES[keyList[index]][2])
-        print("temperature:", MYENZYMES[keyList[index]][3])
+        print("binding site:", myenzymes[keylist[index]][0])
+        print(myenzymes[keylist[index]][1], "ends")
+        print("buffer:", myenzymes[keylist[index]][2])
+        print("temperature:", myenzymes[keylist[index]][3])
         print("\n")
     else:
-        print("binding site of", enzymes[0], ":", MYENZYMES[enzymes[0]][0])
-        print("binding site of", enzymes[1], ":", MYENZYMES[enzymes[1]][0])
-        print(enzymes[0], "has", MYENZYMES[enzymes[0]][1], "ends")
-        print(enzymes[1], "has", MYENZYMES[enzymes[1]][1], "ends")
-        buffers1 = MYENZYMES[enzymes[0]][2].split("/")
-        buffers2 = MYENZYMES[enzymes[1]][2].split("/")
+        print("binding site of", enzymes[0], ":", myenzymes[enzymes[0]][0])
+        print("binding site of", enzymes[1], ":", myenzymes[enzymes[1]][0])
+        print(enzymes[0], "has", myenzymes[enzymes[0]][1], "ends")
+        print(enzymes[1], "has", myenzymes[enzymes[1]][1], "ends")
+        buffers1 = myenzymes[enzymes[0]][2].split("/")
+        buffers2 = myenzymes[enzymes[1]][2].split("/")
         if "CS" in buffers1 and "CS" in buffers2:
             print("buffer: CS")
         elif "3.1" in buffers1 and "3.1" in buffers2:
@@ -48,16 +49,17 @@ def print_results(index, mi_keydict, si_keydict, wt_keydict, keyList, enzymes, o
             print("buffer: 2.1")
         else:
             print("Please select the suitable buffer manually")
-            print("buffers of", enzymes[0], ":", MYENZYMES[enzymes[0]][2])
-            print("buffers of", enzymes[1], ":", MYENZYMES[enzymes[1]][2])
-        if MYENZYMES[enzymes[0]][3] == "37 °C" and MYENZYMES[enzymes[1]][3] == "37 °C":
+            print("buffers of", enzymes[0], ":", myenzymes[enzymes[0]][2])
+            print("buffers of", enzymes[1], ":", myenzymes[enzymes[1]][2])
+        if myenzymes[enzymes[0]][3] == "37 °C" and myenzymes[enzymes[1]][3] == "37 °C":
             print("temperature: 37 °C")
-        elif MYENZYMES[enzymes[0]][3] == "50 °C" and MYENZYMES[enzymes[1]][3] == "50 °C":
+        elif myenzymes[enzymes[0]][3] == "50 °C" and myenzymes[enzymes[1]][3] == "50 °C":
             print("temperature: 50 °C")
         else:
             print("Digestion has to be done in two steps with following temperatures:",
-                  MYENZYMES[enzymes[0]][3], ",", MYENZYMES[enzymes[1]][3])
+                  myenzymes[enzymes[0]][3], ",", myenzymes[enzymes[1]][3])
         print("\n")
+
 
 def southern_in_cbx():
     # runs OneEnzyme.py and BiologicalCheck.py for wildtype, single integration and multiple integration
@@ -73,7 +75,8 @@ def southern_in_cbx():
     printed = False
     for i in range(len(wt_keylist2)):
         if wt_keylist2[i] in wt_keydict and wt_keylist2[i] in si_keydict and wt_keylist2[i] in mi_keydict \
-                and is_size_difference_valid(si_keydict[wt_keylist2[i]]) and is_size_difference_valid(mi_keydict[wt_keylist2[i]]):
+                and is_size_difference_valid(si_keydict[wt_keylist2[i]]) \
+                and is_size_difference_valid(mi_keydict[wt_keylist2[i]]):
             enzymes, only_one_enzyme = [], []
             p = "none"
             print_results(i, mi_keydict, si_keydict, wt_keydict, wt_keylist2, enzymes, only_one_enzyme, p)
@@ -91,11 +94,12 @@ def southern_in_cbx():
             if si_keylist4[o] not in final_keylist:
                 final_keylist.append(si_keylist4[o])
         for n in range(len(mi_keylist4)):
-            if mi_keylist4[o] not in final_keylist:
-                final_keylist.append(mi_keylist4[o])
+            if mi_keylist4[n] not in final_keylist:
+                final_keylist.append(mi_keylist4[n])
 
         for k in range(len(final_keylist)):
-            if final_keylist[k] in wt_keydict2 and final_keylist[k] in si_keydict2 and final_keylist[k] in mi_keydict2:
+            if final_keylist[k] in wt_keydict2 and final_keylist[k] in si_keydict2 \
+                    and final_keylist[k] in mi_keydict2:
                 if si_keydict2[final_keylist[k]] and mi_keydict2[final_keylist[k]] \
                         and is_size_difference_valid(si_keydict2[final_keylist[k]]) \
                         and is_size_difference_valid(mi_keydict2[final_keylist[k]]):
@@ -103,22 +107,27 @@ def southern_in_cbx():
                     only_one_enzyme = []
                     p = "none"
                     print_results(k, mi_keydict2, si_keydict2, wt_keydict2, final_keylist, enzymes, only_one_enzyme, p)
-            elif final_keylist[k] in wt_keydict2 and final_keylist[k] not in si_keydict2 and final_keylist[k] not in mi_keydict2:
+            elif final_keylist[k] in wt_keydict2 and final_keylist[k] not in si_keydict2 \
+                    and final_keylist[k] not in mi_keydict2:
                 enzymes = final_keylist[k].split("+")
                 for m in range(2):
                     if enzymes[m] in mi_keydict and enzymes[m] in si_keydict:
                         only_one_enzyme = [si_keydict[enzymes[m]], mi_keydict[enzymes[m]]]
                         if wt_keydict2[final_keylist[k]] \
-                                and is_size_difference_valid(wt_keydict2[final_keylist[k]]) and is_size_difference_valid(only_one_enzyme[0]) and is_size_difference_valid(only_one_enzyme[1]):
+                                and is_size_difference_valid(wt_keydict2[final_keylist[k]]) \
+                                and is_size_difference_valid(only_one_enzyme[0]) \
+                                and is_size_difference_valid(only_one_enzyme[1]):
                             p = "wt"
                             print_results(k, mi_keydict2, si_keydict2, wt_keydict2, final_keylist, enzymes, only_one_enzyme, p)
-            elif final_keylist[k] not in wt_keydict2 and final_keylist[k] in mi_keydict2 and final_keylist[k] in si_keydict2:
+            elif final_keylist[k] not in wt_keydict2 and final_keylist[k] in mi_keydict2 \
+                    and final_keylist[k] in si_keydict2:
                 enzymes = final_keylist[k].split("+")
                 for m in range(2):
                     if enzymes[m] in wt_keydict:
                         only_one_enzyme = wt_keydict[enzymes[m]]
                         if si_keydict2[final_keylist[k]] and mi_keydict2[final_keylist[k]] \
-                                and is_size_difference_valid(si_keydict2[final_keylist[k]]) and is_size_difference_valid(mi_keydict2[final_keylist[k]]) and is_size_difference_valid(only_one_enzyme):
+                                and is_size_difference_valid(si_keydict2[final_keylist[k]]) \
+                                and is_size_difference_valid(mi_keydict2[final_keylist[k]]) \
+                                and is_size_difference_valid(only_one_enzyme):
                             p = "si+mi"
                             print_results(k, mi_keydict2, si_keydict2, wt_keydict2, final_keylist, enzymes, only_one_enzyme, p)
-
