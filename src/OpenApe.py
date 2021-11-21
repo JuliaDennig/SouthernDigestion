@@ -1,3 +1,5 @@
+import re
+
 def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
     while True:
         probe_bindingsite = input("Please choose the features where the probe is binding.\n")
@@ -35,7 +37,6 @@ def get_information_from_ape_file():
             labels.append(l)
 
     probesdict = {}; labellist = []
-    import re
     for m in range(0, len(probes)):
         bindingsite = re.sub('\D', ' ', features[probes[m]])
         bindingsites = bindingsite.split(" ")
