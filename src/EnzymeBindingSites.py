@@ -13,7 +13,8 @@ def append_enzyme_binding_sites(TopEnzymes, i, keyfeatures, keylist, probe_bindi
 def get_enzyme_binding_sites_dict(sequence, probe_bindingsites, keyfeatures):
     MYENZYMES, TOPENZYMES = get_enzymes_dicts()
 
-    splitdic = {}; keylist = []
+    splitdic = {}
+    keylist = []
     for i in range(len(TOPENZYMES)):
         splitlist = []
         enzyme_binding = MYENZYMES[TOPENZYMES[i]][0].replace("^", "")

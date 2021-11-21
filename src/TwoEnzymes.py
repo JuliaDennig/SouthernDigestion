@@ -1,5 +1,6 @@
 def check_digestion_with_two_enzymes(splitdic, probe_bindingsites, keyfeatures):
-    keylist2 = []; new_splitdict = {}; keylist_two_enzymes = []; keydict = {}; banddict = {}
+    keylist2, keylist_two_enzymes = [], []\
+    new_splitdict, keydict, banddict = {}, {}, {}
 
     for key in splitdic:
         keylist2.append(key)
@@ -14,7 +15,7 @@ def check_digestion_with_two_enzymes(splitdic, probe_bindingsites, keyfeatures):
     for k in range(len(keylist_two_enzymes)):
         surrounding_bands = []
         for m in range(len(keyfeatures)):
-            smaller_bands = []; bigger_bands = []
+            smaller_bands, bigger_bands = [], []
             two_enzymes = new_splitdict[keylist_two_enzymes[k]]
             for v in range(len(two_enzymes)):
                 if int(two_enzymes[v]) < int(probe_bindingsites[keyfeatures[m]][0]):

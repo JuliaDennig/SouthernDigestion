@@ -65,7 +65,8 @@ def southern_in_locus():
         if wt_keylist2[i] in wt_keydict and wt_keylist2[i] in mut_keydict and mut_keydict[wt_keylist2[i]] \
                 and is_size_difference_valid(wt_keydict[wt_keylist2[i]]) and is_size_difference_valid(mut_keydict[wt_keylist2[i]]) \
                 and (len(wt_keydict[wt_keylist2[i]]) == len(mut_keydict[wt_keylist2[i]]) > 1 or len(mut_keydict[wt_keylist2[i]]) != len(wt_keydict[wt_keylist2[i]])):
-            enzymes = []; only_one_enzyme = []; p = "none"
+            enzymes, only_one_enzyme = [], []
+            p = "none"
             print_results(i, mut_keydict, wt_keydict, wt_keylist2, enzymes, only_one_enzyme, p)
             printed = True
     if printed:
@@ -87,7 +88,8 @@ def southern_in_locus():
                         and is_size_difference_valid(wt_keydict2[final_keylist[j]]) and is_size_difference_valid(mut_keydict2[final_keylist[j]]) \
                         and (len(wt_keydict2[final_keylist[j]]) == len(mut_keydict2[final_keylist[j]]) > 1 or len(wt_keydict2[final_keylist[j]]) != len(mut_keydict2[final_keylist[j]])):
                     enzymes = final_keylist[j].split("+")
-                    only_one_enzyme = []; p = "none"
+                    only_one_enzyme = []
+                    p = "none"
                     print_results(j, mut_keydict2, wt_keydict2, final_keylist, enzymes, only_one_enzyme, p)
             elif final_keylist[j] in wt_keydict2 and final_keylist[j] not in mut_keydict2:
                 enzymes = final_keylist[j].split("+")

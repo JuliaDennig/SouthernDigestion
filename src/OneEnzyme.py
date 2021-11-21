@@ -1,17 +1,18 @@
 def check_digestion_with_one_enzyme(splitdic_multiple, probe_bindingsites, keyfeatures):
-    keylist2 = []; keydict = {}; new_keylist = []
+    keylist2, new_keylist = [], []
+    keydict = {}
 
     for key in splitdic_multiple:
         keylist2.append(key)
 
     for i in range(len(keylist2)):
-        bands = []; keylist3 = []; new_keylist = []
+        bands, keylist3, new_keylist = [], [], []
         for j in range(len(splitdic_multiple[keylist2[i]])):
             bands.append(splitdic_multiple[keylist2[i]][j])
         bands.sort()
         banddict = {}
         for k in range(len(keyfeatures)):
-            smaller_bands = []; bigger_bands = []; surrounding_bands = []
+            smaller_bands, bigger_bands, surrounding_bands = [], [], []
             for v in range(len(bands)):
                 if int(bands[v]) < int(probe_bindingsites[keyfeatures[k]][0]):
                     smaller_bands.append(bands[v])

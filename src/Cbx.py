@@ -68,8 +68,9 @@ def southern_in_cbx():
     for i in range(len(wt_keylist2)):
         if wt_keylist2[i] in wt_keydict and wt_keylist2[i] in si_keydict and wt_keylist2[i] in mi_keydict \
                 and is_size_difference_valid(si_keydict[wt_keylist2[i]]) and is_size_difference_valid(mi_keydict[wt_keylist2[i]]):
-            enzymes = []
-            print_results(i, mi_keydict, si_keydict, wt_keydict, wt_keylist2, enzymes)
+            enzymes, only_one_enzyme = [], []
+            p = "none"
+            print_results(i, mi_keydict, si_keydict, wt_keydict, wt_keylist2, enzymes, only_one_enzyme, p)
             printed = True
     if printed:
         digestion_found = input("Did you found a fitting digestion? y/n\n")
@@ -80,12 +81,12 @@ def southern_in_cbx():
         mi_keylist4, mi_keydict2, mi_splitdic2 = southern_two_enzymes(mi_splitdic, mi_probe_bindingsites, mi_keyfeatures)
 
         final_keylist = wt_keylist4
-        for l in range(len(si_keylist4)):
-            if si_keylist4[l] not in final_keylist:
-                final_keylist.append(si_keylist4[l])
+        for o in range(len(si_keylist4)):
+            if si_keylist4[o] not in final_keylist:
+                final_keylist.append(si_keylist4[o])
         for n in range(len(mi_keylist4)):
-            if mi_keylist4[l] not in final_keylist:
-                final_keylist.append(mi_keylist4[l])
+            if mi_keylist4[o] not in final_keylist:
+                final_keylist.append(mi_keylist4[o])
 
         for k in range(len(final_keylist)):
             if final_keylist[k] in wt_keydict2 and final_keylist[k] in si_keydict2 and final_keylist[k] in mi_keydict2:
@@ -93,7 +94,8 @@ def southern_in_cbx():
                         and is_size_difference_valid(si_keydict2[final_keylist[k]]) \
                         and is_size_difference_valid(mi_keydict2[final_keylist[k]]):
                     enzymes = final_keylist[k].split("+")
-                    only_one_enzyme = []; p = "none"
+                    only_one_enzyme = []
+                    p = "none"
                     print_results(k, mi_keydict2, si_keydict2, wt_keydict2, final_keylist, enzymes, only_one_enzyme, p)
             elif final_keylist[k] in wt_keydict2 and final_keylist[k] not in si_keydict2 and final_keylist[k] not in mi_keydict2:
                 enzymes = final_keylist[k].split("+")

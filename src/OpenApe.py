@@ -9,7 +9,8 @@ def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
             break
 
 def get_information_from_ape_file():
-    apelines = []; features = []; keyfeatures = []; yes = ["yes", "y", "Y", "Yes"]; no = ["no", "n", "No", "N"]
+    apelines, features, keyfeatures = [], [], []
+    yes = ["yes", "y", "Y", "Yes"]; no = ["no", "n", "No", "N"]
     apefile = input("Where is the apefile saved? ")
     with open(apefile, "r") as apefile:
         apelines.append(apefile.readlines())
@@ -29,14 +30,15 @@ def get_information_from_ape_file():
     for k in range(feature_start, sequence_start-1):
         features.append(apelines[0][k])
 
-    probes = []; labels = []
+    probes, labels = [], []
     for l, elem in enumerate(features):
         if '..' in elem:
             probes.append(l)
         if '/label=' in elem:
             labels.append(l)
 
-    probesdict = {}; labellist = []
+    probesdict = {}
+    labellist = []
     for m in range(0, len(probes)):
         bindingsite = re.sub('\D', ' ', features[probes[m]])
         bindingsites = bindingsite.split(" ")
