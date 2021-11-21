@@ -1,4 +1,10 @@
 def check_digestion_with_one_enzyme(splitdic_multiple, probe_bindingsites, keyfeatures):
+    # defines the cutting locations around the probe bindings of one enzyme
+    # and from that calculates the resulting band size(s)
+
+    # returns list with enzymes that in single use result in bands in Southern Blot (new_keylist),
+    # dictionary with used enzymes as key and list of resulting bands as value (keydict)
+
     keylist2, new_keylist = [], []
     keydict = {}
 

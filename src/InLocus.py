@@ -4,6 +4,10 @@ from Southern_current import southern_two_enzymes
 from BiologicalCheck import is_size_difference_valid
 
 def print_results(index, mut_keydict, wt_keydict, keyList, enzymes, only_one_enzyme, p):
+    # prints the results of the in silico Southern digestion:
+    # enzyme(s) to use, resulting band(s) for wildtype/mutation, binding site(s),
+    # cutting type(s), buffer, and  temperature
+
     MYENZYMES = Enzymdatabase.MYENZYMES
     if not enzymes:
         print(keyList[index])
@@ -53,6 +57,8 @@ def print_results(index, mut_keydict, wt_keydict, keyList, enzymes, only_one_enz
         print("\n")
 
 def southern_in_locus():
+    # runs OneEnzyme.py and BiologicalCheck.py for wildtype and mutation
+
     print("WILDTYPE")
     wt_keylist2, wt_keydict, wt_splitdic, wt_probe_bindingsites, wt_keyfeatures = southern_one_enzyme()
     print("MUTATION")

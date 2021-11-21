@@ -1,6 +1,8 @@
 import re
 
 def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
+    # takes the feature(s) where the probe is binding as input
+
     while True:
         probe_bindingsite = input("Please choose the features where the probe is binding.\n")
         if probe_bindingsite in probesdic and probe_bindingsite not in probe_bindingsites:
@@ -9,6 +11,10 @@ def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
             break
 
 def get_location_of_ape_file():
+    # takes location of the ape file as input, reads the ape file one line at a time
+    # and prints the type of the sequence (linear/circular)
+    # returns list (apelines) with the lines from the ape file
+
     apelines = []
     location_apefile = input("Where is the location_apefile saved? ")
     with open(location_apefile, "r") as location_apefile:
@@ -21,6 +27,11 @@ def get_location_of_ape_file():
     return apelines
 
 def get_information_from_ape_file(apelines):
+    # takes the list with the lines from the ape files, saves the sequence in a string (sequence)
+    # and the features in a list (features)
+    # returns sequence, list of feature where the probe is binding and dictionary with name of the feature
+    # where the probe is binding as key and list of the beginning and the end of the feature as value
+
     features, keyfeatures = [], []
     yes = ["yes", "y", "Y", "Yes"]
     no = ["no", "n", "No", "N"]
@@ -62,5 +73,6 @@ def get_information_from_ape_file(apelines):
             choose_probe_binding(keyfeatures, probe_bindingsites, probesdict)
         elif ask_again in no:
             break
+
     return sequence, probe_bindingsites, keyfeatures
 

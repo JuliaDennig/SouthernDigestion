@@ -1,3 +1,8 @@
+# constants:
+# MYENZYMES is the complete dictionary of all enzymes available in my lab and their features
+# (cutting sequence, type of cutting, buffer(s), temperature)
+# TOPENZYMES is a list of the most common used enzymes for Southern Blot or test digestion
+
 MYENZYMES = {
     "Asc65I": [
         "G^GTACC",
