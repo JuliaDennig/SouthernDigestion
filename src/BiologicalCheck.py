@@ -1,4 +1,4 @@
-def isSizeDifferenceValid(key):
+def is_size_difference_valid(key):
     if len(key) == 1:
         if 1000 <= key[0] <= 8000:
             return True

@@ -1,4 +1,4 @@
-def getInformationFromApeFile():
+def get_information_from_ape_file():
     apelines = []; features = []; keyfeatures = []; yes = ["yes", "y", "Y", "Yes"]; no = ["no", "n", "No", "N"]
     apefile = input("Where is the apefile saved? ")
     with open(apefile, "r") as apefile:
@@ -9,14 +9,14 @@ def getInformationFromApeFile():
         elif 'circular' in elem:
             print("The sequence is circular.\n")
 
-    sequencestart = apelines[0].index("ORIGIN\n") + 1
-    sequence = ''.join(apelines[0][sequencestart:])
+    sequence_start = apelines[0].index("ORIGIN\n") + 1
+    sequence = ''.join(apelines[0][sequence_start:])
     sequence = sequence.replace("\n", "").replace(" ", "").replace("\t", "").replace("/", "").upper()
     for j in range(0, 10):
         sequence = sequence.replace(str(j), "")
 
-    featurestart = apelines[0].index("FEATURES             Location/Qualifiers\n") + 1
-    for k in range(featurestart, sequencestart-1):
+    feature_start = apelines[0].index("FEATURES             Location/Qualifiers\n") + 1
+    for k in range(feature_start, sequence_start-1):
         features.append(apelines[0][k])
 
     probes = []; labels = []
@@ -26,7 +26,7 @@ def getInformationFromApeFile():
         if '/label=' in elem:
             labels.append(l)
 
-    probesdic = {}; labellist = []
+    probesdict = {}; labellist = []
     import re
     for m in range(0, len(probes)):
         bindingsite = re.sub('\D', ' ', features[probes[m]])
@@ -34,26 +34,26 @@ def getInformationFromApeFile():
         bindingsites = list(filter(None, bindingsites))
         label = features[labels[m]].replace("/label=", "").replace("\n", "").replace(" ", "").replace('"', "")
         labellist.append(label)
-        probesdic.update({label: bindingsites})
-    probebindingsites = {}
+        probesdict.update({label: bindingsites})
+    probe_bindingsites = {}
 
     print("Following features are marked in the sequence: ", labellist)
 
-    chooseProbeBinding(keyfeatures, probebindingsites, probesdic)
+    choose_probe_binding(keyfeatures, probe_bindingsites, probesdict)
 
     while True:
-        askagain = input("Is there another feature where the probe binds? y/n\n")
-        if askagain in yes:
-            chooseProbeBinding(keyfeatures, probebindingsites, probesdic)
-        elif askagain in no:
+        ask_again = input("Is there another feature where the probe binds? y/n\n")
+        if ask_again in yes:
+            choose_probe_binding(keyfeatures, probe_bindingsites, probesdict)
+        elif ask_again in no:
             break
-    return sequence, probebindingsites, keyfeatures
+    return sequence, probe_bindingsites, keyfeatures
 
 
-def chooseProbeBinding(keyfeatures, probebindingsites, probesdic):
+def choose_probe_binding(keyfeatures, probe_bindingsites, probesdic):
     while True:
-        probebindingsite = input("Please choose the features where the probe is binding.\n")
-        if probebindingsite in probesdic and probebindingsite not in probebindingsites:
-            probebindingsites.update({probebindingsite: probesdic[probebindingsite]})
-            keyfeatures.append(probebindingsite)
+        probe_bindingsite = input("Please choose the features where the probe is binding.\n")
+        if probe_bindingsite in probesdic and probe_bindingsite not in probe_bindingsites:
+            probe_bindingsites.update({probe_bindingsite: probesdic[probe_bindingsite]})
+            keyfeatures.append(probe_bindingsite)
             break

@@ -1,15 +1,15 @@
-from Cbx import southernInCbx
-from InLocus import southernInLocus
+from Cbx import southern_in_cbx
+from InLocus import southern_in_locus
 
 
-southerntype = input("What kind of integration are you checking for with the southern blot? cbx/in locus\n")
+southern_type = input("What kind of integration are you checking for with the southern blot? cbx/in locus\n")
 
 
-if southerntype == "cbx" or southerntype == "Cbx":
-    southernInCbx()
+if southern_type == "cbx" or southern_type == "Cbx":
+    southern_in_cbx()
 
-elif southerntype == "in locus" or southerntype == "In locus" or southerntype == "In Locus" or southerntype == "in Locus":
-    southernInLocus()
+elif southern_type == "in locus" or southern_type == "In locus" or southern_type == "In Locus" or southern_type == "in Locus":
+    southern_in_locus()
 
 #Dateien:
 #wt - C:\Users\julia\Desktop\PythonPro\Testfiles\UMAG_04391_Genom.ape

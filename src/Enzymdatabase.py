@@ -1,5 +1,5 @@
-def getEnzymesDicts():
-    JoergsEnzymes = {
+def get_enzymes_dicts():
+    MYENZYMES = {
         "Asc65I": [
             "G^GTACC",
             "sticky",
@@ -425,7 +425,7 @@ def getEnzymesDicts():
             "37 °C"
         ]
     }
-    TopEnzymes = [
+    TOPENZYMES = [
         "AgeI-HF",
         "BamHI-HF",
         "BglII",
@@ -449,4 +449,4 @@ def getEnzymesDicts():
         "XhoI",
         "XmaI"
     ]
-    return JoergsEnzymes, TopEnzymes
+    return MYENZYMES, TOPENZYMES

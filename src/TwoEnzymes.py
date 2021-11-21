@@ -1,39 +1,39 @@
-def checkDigestionWithTwoEnzymes(splitdic, probebindingsites, keyfeatures):
-    keylist2 = []; newSplitDic = {}; keylistTwoEnzymes = []; keydict = {}; banddic = {}
+def check_digestion_with_two_enzymes(splitdic, probe_bindingsites, keyfeatures):
+    keylist2 = []; new_splitdict = {}; keylist_two_enzymes = []; keydict = {}; banddict = {}
 
     for key in splitdic:
         keylist2.append(key)
 
     for i in range(len(keylist2)):
         for j in range(i+1, len(keylist2)):
-            bandsTwoEnzymes = splitdic[keylist2[i]]+splitdic[keylist2[j]]
-            keylistTwoEnzymes.append(keylist2[i]+"+"+keylist2[j])
-            bandsTwoEnzymes.sort()
-            newSplitDic.update({keylist2[i]+"+"+keylist2[j]: bandsTwoEnzymes})
+            bands_two_enzymes = splitdic[keylist2[i]]+splitdic[keylist2[j]]
+            keylist_two_enzymes.append(keylist2[i]+"+"+keylist2[j])
+            bands_two_enzymes.sort()
+            new_splitdict.update({keylist2[i]+"+"+keylist2[j]: bands_two_enzymes})
 
-    for k in range(len(keylistTwoEnzymes)):
-        surroundingBands = []
+    for k in range(len(keylist_two_enzymes)):
+        surrounding_bands = []
         for m in range(len(keyfeatures)):
-            smallerBands = []; biggerBands = []
-            twoEnzymes = newSplitDic[keylistTwoEnzymes[k]]
-            for v in range(len(twoEnzymes)):
-                if int(twoEnzymes[v]) < int(probebindingsites[keyfeatures[m]][0]):
-                    smallerBands.append(twoEnzymes[v])
-                if int(twoEnzymes[v]) > int(probebindingsites[keyfeatures[m]][1]):
-                    biggerBands.append(twoEnzymes[v])
-            if smallerBands and biggerBands:
-                surroundingBands.append([smallerBands[-1], biggerBands[0]])
+            smaller_bands = []; bigger_bands = []
+            two_enzymes = new_splitdict[keylist_two_enzymes[k]]
+            for v in range(len(two_enzymes)):
+                if int(two_enzymes[v]) < int(probe_bindingsites[keyfeatures[m]][0]):
+                    smaller_bands.append(two_enzymes[v])
+                if int(two_enzymes[v]) > int(probe_bindingsites[keyfeatures[m]][1]):
+                    bigger_bands.append(two_enzymes[v])
+            if smaller_bands and bigger_bands:
+                surrounding_bands.append([smaller_bands[-1], bigger_bands[0]])
             else:
-                surroundingBands.append([])
-            banddic.update({keylistTwoEnzymes[k]: surroundingBands})
+                surrounding_bands.append([])
+            banddict.update({keylist_two_enzymes[k]: surrounding_bands})
 
-    for n in range(len(keylistTwoEnzymes)):
+    for n in range(len(keylist_two_enzymes)):
         keylist3 = []
         for q in range(len(keyfeatures)):
-            bandsTwoEnzymes = banddic[keylistTwoEnzymes[n]]
-            if bandsTwoEnzymes and bandsTwoEnzymes[q] and bandsTwoEnzymes[q][1] - bandsTwoEnzymes[q][0] not in keylist3:
-                keylist3.append(bandsTwoEnzymes[q][1] - bandsTwoEnzymes[q][0])
+            bands_two_enzymes = banddict[keylist_two_enzymes[n]]
+            if bands_two_enzymes and bands_two_enzymes[q] and bands_two_enzymes[q][1] - bands_two_enzymes[q][0] not in keylist3:
+                keylist3.append(bands_two_enzymes[q][1] - bands_two_enzymes[q][0])
                 keylist3.sort(reverse=True)
-        keydict.update({keylistTwoEnzymes[n]: keylist3})
+        keydict.update({keylist_two_enzymes[n]: keylist3})
 
-    return keylistTwoEnzymes, keydict, newSplitDic
+    return keylist_two_enzymes, keydict, new_splitdict
