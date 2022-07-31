@@ -6,7 +6,7 @@ The program differentiates between an _in locus_ transformation and an _in cbx_ 
 
 
 ## How to use?
-You need the `.ape`-files in which the features where the probe used in Southern Blot.
+You need the `.ape`-files in which the features where the probe used in Southern Blot is marked.
 The program is started by `python Southern.py`. First input differentiates between _in locus_ or
 _cbx_ integration. 
 
